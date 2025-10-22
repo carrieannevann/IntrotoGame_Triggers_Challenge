@@ -1,20 +1,16 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-// Sam Robichaud NSCC
-
 public class TriggerSetActive : MonoBehaviour
-{ 
-    public GameObject targetObject;
-    
-    void OnTriggerEnter(Collider other)
-    {
-        targetObject.SetActive(false);
-    }
+{
+    [Header("Target Animation")]
+    public Animator targetAnimator;     // Drag the animated cube's Animator here
+    public string triggerName = "Play"; // The name of the animation trigger
 
-    void OnTriggerExit(Collider other)
+    private void OnTriggerEnter(Collider other)
     {
-        targetObject.SetActive(true);
-    }       
+        if (other.CompareTag("Player"))
+        {
+            targetAnimator.SetTrigger(triggerName);
+        }
+    }
 }
